@@ -3,6 +3,8 @@ package br.com.projetohobby.ws.midia.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.projetohobby.ws.model.Genero;
+
 public class TestMidiaFilme {
 
 	private static List<Filme> testFilmes() {
@@ -45,7 +47,7 @@ public class TestMidiaFilme {
 		supermanOFilme.setNomeOriginal("Superman: The Movie");
 		supermanOFilme.setClassificacao("12");
 		supermanOFilme.setDuracao(143);
-		supermanOFilme.setGenero("Ação / Aventura Ficção científica");
+		supermanOFilme.addGenero(Genero.ACAO);
 		supermanOFilme.setSinopse("No planeta Krypton, usando provas fornecidas pelo cientista Jor-El, o Conselho condena tentativas de insurreição do General Zod, Ursa e Non à Zona Fantasma. Por isso, Zod jura vingança sobre Jor-El e sua família. Jor-El, apesar de sua eminência, é incapaz de convencer o Conselho de que Krypton em breve será destruído quando seu supergigante sol vermelho entrar em supernova. Para salvar seu filho, Kal-El, Jor-El lança uma nave espacial que o contém para a Terra, um planeta com uma atmosfera adequada onde a estrutura molecular densa de Kal-El lhe dará poderes sobre-humanos. Pouco depois do lançamento, o sol de Krypton explode, destruindo o planeta.");		
 		supermanOFilme.getDiretores().add(diretor1);
 		supermanOFilme.setJaAssitir(true);

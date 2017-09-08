@@ -3,6 +3,8 @@ package br.com.projetohobby.ws.midia.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.projetohobby.ws.model.Genero;
+
 public class TestMidiaSerie {
 
 	private static List<Serie> testSeries() {
@@ -134,21 +136,11 @@ public class TestMidiaSerie {
 		sherlock.setNomeOriginal("Sherlock");
 		sherlock.setDuracao(85);
 		sherlock.setClassificacao("16");
-		sherlock.setGenero("Drama policial");
+		//sherlock.addGenero(Genero.DRAMA_POLICIAL);
 		sherlock.getElencos().addAll(elencosSerieSherlock);
 		sherlock.getRoteristas().addAll(roteristasSerieSherlock);
 		
 		sherlock.setTemporada(temporadas);
-		
-		// setado o filme nos elencos, diretores e roteristas
-		ator1.setSerie(sherlock);
-		ator2.setSerie(sherlock);
-		
-		roterista11T.setSerie(sherlock);
-		roterista21T.setSerie(sherlock);
-		
-		diretor11T.setSerie(sherlock);
-		diretor21T.setSerie(sherlock);
 		
 		series.add(sherlock);
 		
@@ -165,7 +157,7 @@ public class TestMidiaSerie {
 			System.out.println("Nome Original: " + serie.getNomeOriginal());
 			System.out.println("Duração: " + serie.getDuracao());
 			System.out.println("Classificação: " + serie.getClassificacao());
-			System.out.println("Genêro: " + serie.getGenero());
+			//System.out.println("Genêro: " + serie.getGenero());
 			
 			System.out.print("Elencos: ");
 			for (Ator ator : serie.getElencos())
