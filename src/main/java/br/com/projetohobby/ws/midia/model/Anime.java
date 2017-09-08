@@ -3,9 +3,11 @@ package br.com.projetohobby.ws.midia.model;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+@Entity
 public class Anime extends Midia implements MidaTelevisiva, Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -14,7 +16,7 @@ public class Anime extends Midia implements MidaTelevisiva, Serializable {
 	private List<Temporada> temporadas;
 	
 	@OneToOne
-	private Midia cronologia;
+	private Anime cronologia;
 	
 	public Anime(Long id, String nome) {
 		super(id, nome);
@@ -30,13 +32,11 @@ public class Anime extends Midia implements MidaTelevisiva, Serializable {
 		this.temporadas = temporadas;
 	}
 	
-	@Override
-	public Midia getCronologia() {
+	public Anime getCronologia() {
 		return cronologia;
 	}
 
-	@Override
-	public void setCronologia(Midia cronologia) {
+	public void setCronologia(Anime cronologia) {
 		this.cronologia = cronologia;
 	}
 

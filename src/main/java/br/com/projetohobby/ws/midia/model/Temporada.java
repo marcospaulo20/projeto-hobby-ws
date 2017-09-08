@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -17,7 +18,7 @@ public class Temporada implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
 	private int numero;
@@ -31,7 +32,7 @@ public class Temporada implements Serializable {
 	@JoinColumn(name="anime_id")
 	private Anime anime;
 	
-	@OneToMany(mappedBy = "episodio")
+	@OneToMany(mappedBy = "temporada")
 	private List<Episodio> episodios;
 	
 	public Temporada() { }

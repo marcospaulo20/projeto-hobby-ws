@@ -2,6 +2,7 @@ package br.com.projetohobby.ws.midia.model;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
@@ -9,7 +10,7 @@ import javax.persistence.MappedSuperclass;
 public abstract class Midia {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
 	@Column(name = "nome_original")
@@ -18,8 +19,7 @@ public abstract class Midia {
 	private int duracao;
 	private String sinopse;
 	private String classificacao;
-	private String genero;
-
+	
 	public Midia() {	}
 	
 	public Midia(Long id, String nome) {
@@ -85,17 +85,6 @@ public abstract class Midia {
 		this.classificacao = classificacao;
 	}
 
-	public String getGenero() {
-		return genero;
-	}
-
-	public void setGenero(String genero) {
-		this.genero = genero;
-	}
-	
-	public abstract Midia getCronologia();
-	public abstract void setCronologia(Midia cronologia);
-	
 	public abstract String toString();
 
 	@Override
@@ -122,7 +111,5 @@ public abstract class Midia {
 			return false;
 		return true;
 	}
-	
-	
 	
 }

@@ -3,14 +3,21 @@ package br.com.projetohobby.ws.midia.model;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 import br.com.projetohobby.ws.model.Pessoa;
 
 @Entity
-public class Ator extends ProfissionalMidias implements Serializable {
+public class Ator implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	
 	@OneToOne
 	private Pessoa pessoa;
@@ -24,14 +31,12 @@ public class Ator extends ProfissionalMidias implements Serializable {
 	}
 	
 	public Ator(Long id) {
-		super(id);
-		
+		this.id = id;
 		this.pessoa = new Pessoa();
 	}
 	
 	public Ator(Long id, String nome) {
-		super(id);
-		
+		this.id = id;
 		this.pessoa = new Pessoa();
 		this.pessoa.setNome(nome);
 	}

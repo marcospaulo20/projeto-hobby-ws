@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -13,24 +14,39 @@ public class Serie extends Midia implements MidaTelevisiva, MidiaCinematografica
 
 	private static final long serialVersionUID = 1L;
 		
-	@OneToMany(mappedBy = "serie")
+	@OneToMany(
+		mappedBy = "serie",
+		cascade = CascadeType.ALL,
+		orphanRemoval = true
+	)
 	private List<Temporada> temporadas;
 	
-	@OneToMany(mappedBy = "serie")
+	@OneToMany(
+		cascade = CascadeType.ALL,
+		orphanRemoval = true
+	)
 	private List<Estudio> estudios;
 	
-	@OneToMany(mappedBy = "serie")
+	@OneToMany(
+		cascade = CascadeType.ALL,
+		orphanRemoval = true
+	)
 	private List<Ator> elencos;
 	
-	@OneToMany(mappedBy = "serie")
+	@OneToMany(
+		cascade = CascadeType.ALL,
+		orphanRemoval = true
+	)
 	private List<Diretor> diretores;
 	
-	@OneToMany(mappedBy = "serie")
+	@OneToMany(
+		cascade = CascadeType.ALL,
+		orphanRemoval = true
+	)
 	private List<Roterista> roteristas;
 	
 	@OneToOne
-	private Midia cronologia;
-
+	private Serie cronologia;
 	
 	public Serie() {
 		this.estudios = new ArrayList<>();
@@ -78,13 +94,11 @@ public class Serie extends Midia implements MidaTelevisiva, MidiaCinematografica
 		}
 	}
 	
-	@Override
-	public Midia getCronologia() {
+	public Serie getCronologia() {
 		return cronologia;
 	}
 
-	@Override
-	public void setCronologia(Midia cronologia) {
+	public void setCronologia(Serie cronologia) {
 		this.cronologia = cronologia;
 	}
 	
@@ -106,6 +120,47 @@ public class Serie extends Midia implements MidaTelevisiva, MidiaCinematografica
 	@Override
 	public List<Roterista> getRoteristas() {
 		return roteristas;
+	}
+	
+
+	@Override
+	public void addEstudio(Estudio estudio) {
+		estudios.add(estudio);
+	}
+
+	@Override
+	public void removeEstudio(Estudio estudio) {
+		estudios.remove(estudio);
+	}
+
+	@Override
+	public void addAtor(Ator ator) {
+		elencos.add(ator);
+	}
+
+	@Override
+	public void removeAtor(Ator ator) {
+		elencos.remove(ator);
+	}
+
+	@Override
+	public void addDiretor(Diretor diretor) {
+		diretores.add(diretor);
+	}
+
+	@Override
+	public void removeDiretor(Diretor diretor) {
+		diretores.remove(diretor);
+	}
+
+	@Override
+	public void addRoterista(Roterista roterista) {
+		roteristas.add(roterista);
+	}
+
+	@Override
+	public void removeRoterista(Roterista roterista) {
+		roteristas.remove(roterista);
 	}
 	
 	@Override
