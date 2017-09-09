@@ -5,7 +5,8 @@ import java.util.List;
 public interface MidaTelevisiva {
 
 	List<Temporada> getTemporadas();
-	void setTemporada(List<Temporada> temporadas);
+	void addTemporada(Temporada temporada);
+	void removeTemporada(Temporada temporada);
 	
 	Integer getQtTemporadas();
 }
