@@ -136,11 +136,12 @@ public class TestMidiaSerie {
 		sherlock.setNomeOriginal("Sherlock");
 		sherlock.setDuracao(85);
 		sherlock.setClassificacao("16");
-		//sherlock.addGenero(Genero.DRAMA_POLICIAL);
+		sherlock.addGenero(Genero.DRAMA_POLICIAL);
 		sherlock.getElencos().addAll(elencosSerieSherlock);
 		sherlock.getRoteristas().addAll(roteristasSerieSherlock);
 		
-		sherlock.setTemporada(temporadas);
+		sherlock.addTemporada(temporada1);
+		sherlock.addTemporada(temporada2);
 		
 		series.add(sherlock);
 		
