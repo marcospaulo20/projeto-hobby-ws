@@ -3,13 +3,12 @@ package br.com.projetohobby.ws.midia.model;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -24,15 +23,13 @@ public class Temporada implements Serializable {
 	private int numero;
 	private int ano;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="serie_id")
-	private Serie serie;
+	@Column(length = 1)
+	private String sigla; 
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="anime_id")
-	private Anime anime;
-	
-	@OneToMany(mappedBy = "temporada")
+	@OneToMany(
+		cascade = CascadeType.ALL,
+		orphanRemoval = true
+	)
 	private List<Episodio> episodios;
 	
 	public Temporada() { }
@@ -67,6 +64,14 @@ public class Temporada implements Serializable {
 	
 	public void setAno(int ano) {
 		this.ano = ano;
+	}
+	
+	public String getSigla() {
+		return sigla;
+	}
+	
+	public void setSigla(String sigla) {
+		this.sigla = sigla;
 	}
 	
 	public List<Episodio> getEpisodios() {

@@ -4,7 +4,10 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.MappedSuperclass;
+
+import org.hibernate.annotations.Type;
 
 @MappedSuperclass
 public abstract class Midia {
@@ -17,6 +20,8 @@ public abstract class Midia {
 	private String nomeOriginal;
 	private int ano;
 	private int duracao;
+	@Lob
+	@Type(type = "org.hibernate.type.TextType")
 	private String sinopse;
 	private String classificacao;
 	

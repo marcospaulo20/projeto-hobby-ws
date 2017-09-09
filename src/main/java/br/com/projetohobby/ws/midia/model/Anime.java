@@ -3,6 +3,7 @@ package br.com.projetohobby.ws.midia.model;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -12,7 +13,10 @@ public class Anime extends Midia implements MidaTelevisiva, Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	@OneToMany(mappedBy = "anime")
+	@OneToMany(
+		cascade = CascadeType.ALL,
+		orphanRemoval = true
+	)
 	private List<Temporada> temporadas;
 	
 	@OneToOne
@@ -28,8 +32,14 @@ public class Anime extends Midia implements MidaTelevisiva, Serializable {
 	}
 
 	@Override
-	public void setTemporada(List<Temporada> temporadas) {
-		this.temporadas = temporadas;
+	public void addTemporada(Temporada temporada) {
+		temporada.setSigla("A");
+		this.temporadas.add(temporada);
+	}
+
+	@Override
+	public void removeTemporada(Temporada temporada) {
+		this.temporadas.remove(temporada);
 	}
 	
 	public Anime getCronologia() {

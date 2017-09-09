@@ -5,9 +5,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import br.com.projetohobby.ws.model.Genero;
 
 @Entity
 public class Serie extends Midia implements MidaTelevisiva, MidiaCinematografica, Serializable {
@@ -15,7 +22,6 @@ public class Serie extends Midia implements MidaTelevisiva, MidiaCinematografica
 	private static final long serialVersionUID = 1L;
 		
 	@OneToMany(
-		mappedBy = "serie",
 		cascade = CascadeType.ALL,
 		orphanRemoval = true
 	)
@@ -45,6 +51,12 @@ public class Serie extends Midia implements MidaTelevisiva, MidiaCinematografica
 	)
 	private List<Roterista> roteristas;
 	
+	@ElementCollection(targetClass = Genero.class)
+	@Enumerated(EnumType.STRING)
+	@CollectionTable(name="serie_genero")
+	@Column(name = "genero")
+	private List<Genero> generos;
+	
 	@OneToOne
 	private Serie cronologia;
 	
@@ -70,10 +82,16 @@ public class Serie extends Midia implements MidaTelevisiva, MidiaCinematografica
 	}
 
 	@Override
-	public void setTemporada(List<Temporada> temporadas) {
-		this.temporadas = temporadas;
+	public void addTemporada(Temporada temporada) {
+		temporada.setSigla("S");
+		this.temporadas.add(temporada);
 	}
 
+	@Override
+	public void removeTemporada(Temporada temporada) {
+		this.temporadas.remove(temporada);
+	}
+	
 	@Override
 	public Integer getQtTemporadas() {
 		if (temporadas == null)
@@ -92,6 +110,18 @@ public class Serie extends Midia implements MidaTelevisiva, MidiaCinematografica
 			}
 			return qtEpisodios;
 		}
+	}
+	
+	public List<Genero> getGenero() {
+		return generos;
+	}
+
+	public void addGenero(Genero genero) {
+		generos.add(genero);
+	}
+	
+	public void removeGenero(Genero genero) {
+		generos.remove(genero);
 	}
 	
 	public Serie getCronologia() {

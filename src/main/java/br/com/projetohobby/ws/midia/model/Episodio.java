@@ -4,13 +4,13 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.Lob;
 import javax.persistence.OneToOne;
+
+import org.hibernate.annotations.Type;
 
 @Entity
 public class Episodio implements Serializable {
@@ -24,21 +24,19 @@ public class Episodio implements Serializable {
 	@Column(name = "nome_original")
 	private String nomeOriginal;
 	private int numero;
+	@Lob
+	@Type(type = "org.hibernate.type.TextType")
 	private String resumo;
 
 	@OneToOne
 	private Diretor diretor;
 	@OneToOne
 	private Roterista roterista;
-	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="temporada_id")
-	private Temporada temporada;
-	
+
 	private boolean tenhoNaColecao;
 	private boolean jaAssitir;
 	
-	public Episodio() {		}
+	public Episodio() {	}
 	
 	public Episodio(Long id) {		
 		this.id = id;
@@ -94,14 +92,6 @@ public class Episodio implements Serializable {
 
 	public void setRoterista(Roterista roterista) {
 		this.roterista = roterista;
-	}
-	
-	public Temporada getTemporada() {
-		return temporada;
-	}
-	
-	public void setTemporada(Temporada temporada) {
-		this.temporada = temporada;
 	}
 	
 	public boolean isTenhoNaColecao() {
