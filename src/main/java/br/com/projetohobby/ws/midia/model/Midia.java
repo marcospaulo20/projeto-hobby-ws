@@ -1,5 +1,7 @@
 package br.com.projetohobby.ws.midia.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,8 +12,10 @@ import javax.persistence.MappedSuperclass;
 import org.hibernate.annotations.Type;
 
 @MappedSuperclass
-public abstract class Midia {
+public abstract class Midia implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

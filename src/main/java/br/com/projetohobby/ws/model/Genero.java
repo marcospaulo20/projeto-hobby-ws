@@ -4,7 +4,9 @@ public enum Genero {
 
 	ACAO("Ação"),
 	AVENTURA("Aventura"),
-	DRAMA_POLICIAL("Drama Policial");
+	COMEDIA("Comédia"),
+	DRAMA_POLICIAL("Drama Policial"),
+	TRAGEDIA("Tragédia");
 	
 	private String descricao;
 	

@@ -11,17 +11,16 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import br.com.projetohobby.ws.model.Genero;
+import br.com.projetohobby.ws.model.Roterista;
 
 @Entity
 @Table(name = "filme")
-public class Filme extends Midia implements MidiaCinematografica, Serializable {
+public class Filme extends Midia implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -55,8 +54,7 @@ public class Filme extends Midia implements MidiaCinematografica, Serializable {
 	@Column(name = "genero")
 	private List<Genero> generos;
 
-	@OneToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name = "cronologia_id")
+	@OneToOne
 	private Filme cronologia;
 
 	private boolean tenhoNaColecao;
@@ -64,10 +62,12 @@ public class Filme extends Midia implements MidiaCinematografica, Serializable {
 
 	public Filme() {
 		super();
+		
 		this.estudios = new ArrayList<>();
 		this.elencos = new ArrayList<>();
 		this.diretores = new ArrayList<>();
 		this.roteristas = new ArrayList<>();
+		this.generos = new ArrayList<>();
 	}
 
 	public Filme(Long id, String nome) {
@@ -77,6 +77,7 @@ public class Filme extends Midia implements MidiaCinematografica, Serializable {
 		this.elencos = new ArrayList<>();
 		this.diretores = new ArrayList<>();
 		this.roteristas = new ArrayList<>();
+		this.generos = new ArrayList<>();		
 	}
 
 	public Filme getCronologia() {
@@ -99,27 +100,6 @@ public class Filme extends Midia implements MidiaCinematografica, Serializable {
 		generos.remove(genero);
 	}
 
-	
-	@Override
-	public List<Estudio> getEstudios() {
-		return estudios;
-	}
-
-	@Override
-	public List<Ator> getElencos() {
-		return elencos;
-	}
-
-	@Override
-	public List<Diretor> getDiretores() {
-		return diretores;
-	}
-
-	@Override
-	public List<Roterista> getRoteristas() {
-		return roteristas;
-	}
-
 	public boolean isTenhoNaColecao() {
 		return tenhoNaColecao;
 	}
@@ -135,43 +115,52 @@ public class Filme extends Midia implements MidiaCinematografica, Serializable {
 	public void setJaAssitir(boolean jaAssitir) {
 		this.jaAssitir = jaAssitir;
 	}
+	
+	
+	public List<Estudio> getEstudios() {
+		return estudios;
+	}
 
-	@Override
+	public List<Ator> getElencos() {
+		return elencos;
+	}
+
+	public List<Diretor> getDiretores() {
+		return diretores;
+	}
+
+	public List<Roterista> getRoteristas() {
+		return roteristas;
+	}
+
 	public void addEstudio(Estudio estudio) {
 		estudios.add(estudio);
 	}
 
-	@Override
 	public void removeEstudio(Estudio estudio) {
 		estudios.remove(estudio);
 	}
 
-	@Override
 	public void addAtor(Ator ator) {
 		elencos.add(ator);
 	}
 
-	@Override
 	public void removeAtor(Ator ator) {
 		elencos.remove(ator);
 	}
 
-	@Override
 	public void addDiretor(Diretor diretor) {
 		diretores.add(diretor);
 	}
 
-	@Override
 	public void removeDiretor(Diretor diretor) {
 		diretores.remove(diretor);
 	}
 
-	@Override
 	public void addRoterista(Roterista roterista) {
 		roteristas.add(roterista);
 	}
 
-	@Override
 	public void removeRoterista(Roterista roterista) {
 		roteristas.remove(roterista);
 	}

@@ -17,7 +17,10 @@ public class Estudio implements Serializable {
 	private Long id;
 	private String nome;
 	
-	public Estudio() {
+	public Estudio() { }
+	
+	public Estudio(Long id) {
+		this.id = id;
 	}
 
 	public Long getId() {
@@ -30,6 +33,11 @@ public class Estudio implements Serializable {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	
+	@Override
+	public String toString() {		
+		return "[" + this.id + ", " + this.nome + "]";
 	}
 
 	@Override

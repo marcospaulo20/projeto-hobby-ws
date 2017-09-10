@@ -3,17 +3,16 @@ package br.com.projetohobby.ws.midia.model;
 import java.io.Serializable;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
-import javax.persistence.OneToOne;
+import javax.persistence.MappedSuperclass;
 
 import org.hibernate.annotations.Type;
 
-@Entity
-public class Episodio implements Serializable {
+@MappedSuperclass
+public abstract class Episodio implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -28,12 +27,9 @@ public class Episodio implements Serializable {
 	@Type(type = "org.hibernate.type.TextType")
 	private String resumo;
 
-	@OneToOne
-	private Diretor diretor;
-	@OneToOne
-	private Roterista roterista;
-
+	@Column(name = "tenho_colecao")
 	private boolean tenhoNaColecao;
+	@Column(name = "assistir")
 	private boolean jaAssitir;
 	
 	public Episodio() {	}
@@ -78,22 +74,6 @@ public class Episodio implements Serializable {
 		this.resumo = resumo;
 	}
 
-	public Diretor getDiretor() {
-		return diretor;
-	}
-
-	public void setDiretor(Diretor diretor) {
-		this.diretor = diretor;
-	}
-
-	public Roterista getRoterista() {
-		return roterista;
-	}
-
-	public void setRoterista(Roterista roterista) {
-		this.roterista = roterista;
-	}
-	
 	public boolean isTenhoNaColecao() {
 		return tenhoNaColecao;
 	}
@@ -111,9 +91,7 @@ public class Episodio implements Serializable {
 	}
 
 	@Override
-	public String toString() {
-		return super.toString();
-	}
+	public abstract String toString();
 
 	@Override
 	public int hashCode() {

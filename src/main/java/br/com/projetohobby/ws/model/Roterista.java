@@ -1,4 +1,4 @@
-package br.com.projetohobby.ws.midia.model;
+package br.com.projetohobby.ws.model;
 
 import java.io.Serializable;
 
@@ -8,53 +8,46 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-import br.com.projetohobby.ws.model.Pessoa;
-
 @Entity
 public class Roterista implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@OneToOne
-	private Pessoa pessoa; 
-		
+	private Pessoa pessoa;
+
 	public Roterista() {
-		super();
-		
 		this.pessoa = new Pessoa();
 	}
-	
-	public Roterista(Long id, String nome) {
+
+	public Roterista(Long id, Pessoa pessoa) {
 		this.id = id;
-		
-		this.pessoa = new Pessoa();
-		this.pessoa.setNome(nome);
+		this.pessoa = pessoa;
 	}
-	
+
 	public Pessoa getPessoa() {
 		return pessoa;
 	}
-	
+
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
 	}
-	
-	
+
 	@Override
 	public String toString() {
 		StringBuilder strBuilder = new StringBuilder();
 		strBuilder.append("Roterista [");
 
-		if (this.pessoa != null && this.pessoa.getId() != null && this.pessoa.getNome() != null && this.pessoa.getPais() != null)
-			strBuilder.append("id = ").append(this.pessoa.getId()).append(", ").append(this.pessoa.getNome()).append(", país (")
+		if (this.id != null && this.pessoa != null && this.pessoa.getNome() != null && this.pessoa.getPais() != null)
+			strBuilder.append("id = ").append(this.id).append(", ").append(this.pessoa.getNome()).append(", país (")
 					.append(this.pessoa.getPais()).append(")");
-		else if (this.pessoa != null && this.pessoa.getId() != null && this.pessoa.getNome() != null)
-			strBuilder.append("id = ").append(this.pessoa.getId()).append(", ").append(this.pessoa.getNome());
-		
+		else if (this.id != null && this.pessoa != null && this.pessoa.getNome() != null)
+			strBuilder.append("id = ").append(this.id).append(", ").append(this.pessoa.getNome());
+
 		strBuilder.append("]");
 		return strBuilder.toString();
 	}
@@ -63,6 +56,7 @@ public class Roterista implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((pessoa == null) ? 0 : pessoa.hashCode());
 		return result;
 	}
@@ -76,6 +70,11 @@ public class Roterista implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Roterista other = (Roterista) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
 		if (pessoa == null) {
 			if (other.pessoa != null)
 				return false;
@@ -83,5 +82,5 @@ public class Roterista implements Serializable {
 			return false;
 		return true;
 	}
-	
+
 }

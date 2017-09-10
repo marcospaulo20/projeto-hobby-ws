@@ -1,18 +1,14 @@
 package br.com.projetohobby.ws.midia.model;
 
 import java.io.Serializable;
-import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.MappedSuperclass;
 
-@Entity
-public class Temporada implements Serializable {
+@MappedSuperclass
+public abstract class Temporada implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -21,16 +17,7 @@ public class Temporada implements Serializable {
 	private Long id;
 	private String nome;
 	private int numero;
-	private int ano;
-	
-	@Column(length = 1)
-	private String sigla; 
-	
-	@OneToMany(
-		cascade = CascadeType.ALL,
-		orphanRemoval = true
-	)
-	private List<Episodio> episodios;
+	private int ano; 
 	
 	public Temporada() { }
 	
@@ -66,28 +53,8 @@ public class Temporada implements Serializable {
 		this.ano = ano;
 	}
 	
-	public String getSigla() {
-		return sigla;
-	}
-	
-	public void setSigla(String sigla) {
-		this.sigla = sigla;
-	}
-	
-	public List<Episodio> getEpisodios() {
-		return episodios;
-	}
-	
-	public void setEpisodios(List<Episodio> episodios) {
-		this.episodios = episodios;
-	}
-	
-	public Integer getQtEpisodios() {
-		if (episodios == null)
-			return 0;
-		else
-			return episodios.size();
-	}
+		
+	public abstract Integer getQtEpisodios();		
 	
 	@Override
 	public String toString() {

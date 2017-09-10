@@ -17,7 +17,7 @@ import javax.persistence.OneToOne;
 import br.com.projetohobby.ws.model.Genero;
 
 @Entity
-public class Serie extends Midia implements MidaTelevisiva, MidiaCinematografica, Serializable {
+public class Serie extends Midia implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 		
@@ -25,7 +25,7 @@ public class Serie extends Midia implements MidaTelevisiva, MidiaCinematografica
 		cascade = CascadeType.ALL,
 		orphanRemoval = true
 	)
-	private List<Temporada> temporadas;
+	private List<TemporadaSerie> temporadas;
 	
 	@OneToMany(
 		cascade = CascadeType.ALL,
@@ -37,19 +37,7 @@ public class Serie extends Midia implements MidaTelevisiva, MidiaCinematografica
 		cascade = CascadeType.ALL,
 		orphanRemoval = true
 	)
-	private List<Ator> elencos;
-	
-	@OneToMany(
-		cascade = CascadeType.ALL,
-		orphanRemoval = true
-	)
-	private List<Diretor> diretores;
-	
-	@OneToMany(
-		cascade = CascadeType.ALL,
-		orphanRemoval = true
-	)
-	private List<Roterista> roteristas;
+	private List<Ator> elencos;		
 	
 	@ElementCollection(targetClass = Genero.class)
 	@Enumerated(EnumType.STRING)
@@ -61,38 +49,35 @@ public class Serie extends Midia implements MidaTelevisiva, MidiaCinematografica
 	private Serie cronologia;
 	
 	public Serie() {
+		super();
+		
+		this.temporadas = new ArrayList<>();
 		this.estudios = new ArrayList<>();
 		this.elencos = new ArrayList<>();
-		this.diretores = new ArrayList<>();
-		this.roteristas = new ArrayList<>();
+		this.generos = new ArrayList<>();
 	}
 	
 	public Serie(Long id, String nome) {		
 		super(id, nome);
-		
+
+		this.temporadas = new ArrayList<>();
 		this.estudios = new ArrayList<>();
 		this.elencos = new ArrayList<>();
-		this.diretores = new ArrayList<>();
-		this.roteristas = new ArrayList<>();
+		this.generos = new ArrayList<>();
 	}
 	
-	@Override
-	public List<Temporada> getTemporadas() {
+	public List<TemporadaSerie> getTemporadas() {
 		return temporadas;
 	}
 
-	@Override
-	public void addTemporada(Temporada temporada) {
-		temporada.setSigla("S");
+	public void addTemporada(TemporadaSerie temporada) {
 		this.temporadas.add(temporada);
 	}
 
-	@Override
-	public void removeTemporada(Temporada temporada) {
+	public void removeTemporada(TemporadaSerie temporada) {
 		this.temporadas.remove(temporada);
 	}
 	
-	@Override
 	public Integer getQtTemporadas() {
 		if (temporadas == null)
 			return 0;
@@ -132,65 +117,28 @@ public class Serie extends Midia implements MidaTelevisiva, MidiaCinematografica
 		this.cronologia = cronologia;
 	}
 	
-	@Override
 	public List<Estudio> getEstudios() {
 		return estudios;
 	}
 
-	@Override
 	public List<Ator> getElencos() {
 		return elencos;
 	}
-
-	@Override
-	public List<Diretor> getDiretores() {
-		return diretores;
-	}
-
-	@Override
-	public List<Roterista> getRoteristas() {
-		return roteristas;
-	}
 	
-
-	@Override
 	public void addEstudio(Estudio estudio) {
 		estudios.add(estudio);
 	}
 
-	@Override
 	public void removeEstudio(Estudio estudio) {
 		estudios.remove(estudio);
 	}
 
-	@Override
 	public void addAtor(Ator ator) {
 		elencos.add(ator);
 	}
 
-	@Override
 	public void removeAtor(Ator ator) {
 		elencos.remove(ator);
-	}
-
-	@Override
-	public void addDiretor(Diretor diretor) {
-		diretores.add(diretor);
-	}
-
-	@Override
-	public void removeDiretor(Diretor diretor) {
-		diretores.remove(diretor);
-	}
-
-	@Override
-	public void addRoterista(Roterista roterista) {
-		roteristas.add(roterista);
-	}
-
-	@Override
-	public void removeRoterista(Roterista roterista) {
-		roteristas.remove(roterista);
 	}
 	
 	@Override

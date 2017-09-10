@@ -35,10 +35,9 @@ public class Ator implements Serializable {
 		this.pessoa = new Pessoa();
 	}
 	
-	public Ator(Long id, String nome) {
+	public Ator(Long id, Pessoa pessoa) {
 		this.id = id;
-		this.pessoa = new Pessoa();
-		this.pessoa.setNome(nome);
+		this.pessoa = pessoa;
 	}
 	
 	public Pessoa getPessoa() {
@@ -60,15 +59,13 @@ public class Ator implements Serializable {
 	@Override
 	public String toString() {
 		StringBuilder strBuilder = new StringBuilder();
-		strBuilder.append("Ator [");
+		strBuilder.append("Ator: ");
 		
-		if (this.pessoa != null && this.pessoa.getId() != null && this.pessoa.getNome() != null && this.pessoa.getPais() != null)
-			strBuilder.append("id = ").append(this.pessoa.getId()).append(", ").append(this.pessoa.getNome()).append(", país (")
-					.append(this.pessoa.getPais()).append(")");
-		else if (this.pessoa != null && this.pessoa.getId() != null && this.pessoa.getNome() != null)
-			strBuilder.append("id = ").append(this.pessoa.getId()).append(", ").append(this.pessoa.getNome());
+		if (this.pessoa.getNome() != null && this.personagem != null)
+			strBuilder.append(this.pessoa.getNome()).append(", (").append(this.personagem).append(")");
+		else if (this.id != null && this.pessoa != null && this.pessoa.getNome() != null)
+			strBuilder.append("id = ").append(this.id).append(", ").append(this.pessoa.getNome());
 		
-		strBuilder.append("]");
 		return strBuilder.toString();
 	}
 	

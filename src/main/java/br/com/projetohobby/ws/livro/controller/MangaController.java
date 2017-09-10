@@ -1,4 +1,4 @@
-package br.com.projetohobby.ws.controller;
+package br.com.projetohobby.ws.livro.controller;
 
 import java.util.List;
 
@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.projetohobby.ws.model.Manga;
-import br.com.projetohobby.ws.service.MangaService;
+import br.com.projetohobby.ws.livro.model.Manga;
+import br.com.projetohobby.ws.livro.service.MangaService;
 
 @RestController
 public class MangaController {

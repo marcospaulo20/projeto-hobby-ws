@@ -1,15 +1,23 @@
 package br.com.projetohobby.ws.midia.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import br.com.projetohobby.ws.model.Genero;
+
 @Entity
-public class Anime extends Midia implements MidaTelevisiva, Serializable {
+public class Anime extends Midia implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -17,28 +25,40 @@ public class Anime extends Midia implements MidaTelevisiva, Serializable {
 		cascade = CascadeType.ALL,
 		orphanRemoval = true
 	)
-	private List<Temporada> temporadas;
+	private List<TemporadaAnime> temporadas;
 	
 	@OneToOne
 	private Anime cronologia;
 	
+	@ElementCollection(targetClass = Genero.class)
+	@Enumerated(EnumType.STRING)
+	@CollectionTable(name="anime_genero")
+	@Column(name = "genero")
+	private List<Genero> generos;
+	
+	public Anime() {
+		super();
+		
+		this.generos = new ArrayList<>();
+		this.temporadas = new ArrayList<>();
+	}
+	
 	public Anime(Long id, String nome) {
 		super(id, nome);
+		
+		this.generos = new ArrayList<>();
+		this.temporadas = new ArrayList<>();
 	}
 
-	@Override
-	public List<Temporada> getTemporadas() {
+	public List<TemporadaAnime> getTemporadas() {
 		return temporadas;
 	}
 
-	@Override
-	public void addTemporada(Temporada temporada) {
-		temporada.setSigla("A");
+	public void addTemporada(TemporadaAnime temporada) {
 		this.temporadas.add(temporada);
 	}
 
-	@Override
-	public void removeTemporada(Temporada temporada) {
+	public void removeTemporada(TemporadaAnime temporada) {
 		this.temporadas.remove(temporada);
 	}
 	
@@ -49,13 +69,36 @@ public class Anime extends Midia implements MidaTelevisiva, Serializable {
 	public void setCronologia(Anime cronologia) {
 		this.cronologia = cronologia;
 	}
+	
+	public List<Genero> getGenero() {
+		return generos;
+	}
 
-	@Override
+	public void addGenero(Genero genero) {
+		generos.add(genero);
+	}
+	
+	public void removeGenero(Genero genero) {
+		generos.remove(genero);
+	}
+
 	public Integer getQtTemporadas() {
 		if (temporadas == null)
-			return null;
+			return 0;
 		else
 			return temporadas.size();
+	}
+	
+	public Integer getQtEpisodios() {
+		if (temporadas == null)
+			return 0;
+		else {
+			Integer qtEpisodios = 0;
+			for (Temporada temporada : temporadas) {
+				qtEpisodios += temporada.getQtEpisodios();
+			}
+			return qtEpisodios;
+		}
 	}
 
 	@Override

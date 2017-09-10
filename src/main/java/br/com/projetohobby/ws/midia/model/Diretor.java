@@ -28,19 +28,10 @@ public class Diretor implements Serializable {
 		this.pessoa = new Pessoa();
 	}
 
-	public Diretor(Long id, String nome) {
+	public Diretor(Long id, Pessoa pessoa) {
 		this.id = id;
 
-		this.pessoa = new Pessoa();
-		this.pessoa.setNome(nome);
-	}
-
-	public Diretor(Long id, String nome, String pais) {
-		this.id = id;
-
-		this.pessoa = new Pessoa();
-		this.pessoa.setNome(nome);
-		this.pessoa.setPais(pais);
+		this.pessoa = pessoa;
 	}
 
 	public Pessoa getPessoa() {

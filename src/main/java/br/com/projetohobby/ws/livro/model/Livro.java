@@ -1,4 +1,4 @@
-package br.com.projetohobby.ws.model;
+package br.com.projetohobby.ws.livro.model;
 
 import java.io.Serializable;
 

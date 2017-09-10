@@ -21,8 +21,7 @@ public class Pessoa implements Serializable {
 	@Column(length = 1)
 	private String sexo;
 
-	public Pessoa() {
-	}
+	public Pessoa() { }
 
 	public Pessoa(Long id, String nome) {
 		this.id = id;
@@ -39,10 +38,6 @@ public class Pessoa implements Serializable {
 		return id;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
 	public String getNome() {
 		return nome;
 	}
@@ -57,6 +52,14 @@ public class Pessoa implements Serializable {
 
 	public void setPais(String pais) {
 		this.pais = pais;
+	}
+	
+	public String getSexo() {
+		return sexo;
+	}
+	
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
 	}
 
 	@Override
